@@ -499,7 +499,7 @@ async def send_main_dashboard(
 
         f"🔗 رابطك الخاص:\n"
 
-        f"https://aivideo-wn1o.onrender.com/"
+        f"{os.getenv('BASE_URL', '').rstrip('/')}/?q={user_id}"
         f"?q={user_id}\n\n"
 
         f"📌 **خطوات الاستخدام:**\n"
