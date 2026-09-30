@@ -66,23 +66,10 @@ dp = Dispatcher()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    yield
 
-    polling_task = asyncio.create_task(
-        dp.start_polling(bot)
-    )
+    await bot.session.close()
 
-    try:
-        yield
-
-    finally:
-        polling_task.cancel()
-
-        try:
-            await polling_task
-        except asyncio.CancelledError:
-            pass
-
-        await bot.session.close()
 
 
 app = FastAPI(
